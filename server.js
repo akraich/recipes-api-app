@@ -11,7 +11,10 @@ import { resolvers } from "./resolvers";
 const server = new ApolloServer({ typeDefs, resolvers });
 
 mongoose
-  .connect(process.env.MONGODB_URI, { useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("DB Connected");
   })

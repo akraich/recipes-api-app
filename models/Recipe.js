@@ -23,10 +23,6 @@ const RecipeSchema = Schema({
     type: Date,
     default: Date.now
   },
-  favorites: {
-    type: [Schema.Types.ObjectId],
-    ref: "Recipe"
-  },
   likes: {
     type: Number,
     default: 0

@@ -15,6 +15,12 @@ export const resolvers = {
       const allRecipes = await Recipe.find().exec();
       return allRecipes;
     },
+    getRecipe: async (root, { _id }) => {
+      const recipe = await Recipe.findOne({ _id });
+      console.log(recipe);
+      if (!recipe) throw new Error("No recipe is found");
+      return recipe;
+    },
     getCurrentUser: async (root, args, context) => {
       console.log(context);
       if (!context.currentUser) return null;

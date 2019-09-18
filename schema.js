@@ -27,6 +27,7 @@ export const typeDefs = gql`
 
   type Query {
     getAllRecipes: [Recipe]
+    getCurrentUser: User
   }
 
   type Mutation {
@@ -39,5 +40,7 @@ export const typeDefs = gql`
     ): Recipe
 
     signupUser(username: String!, email: String!, password: String!): Token
+
+    signinUser(username: String!, password: String!): Token
   }
 `;

@@ -32,4 +32,8 @@ const RecipeSchema = Schema({
   }
 });
 
+RecipeSchema.index({
+  "$**": "text"
+});
+
 export default mongoose.model("Recipe", RecipeSchema);

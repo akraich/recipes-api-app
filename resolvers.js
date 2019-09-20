@@ -23,6 +23,26 @@ export const resolvers = {
       if (!recipe) throw new Error("No recipe is found");
       return recipe;
     },
+    searchRecipes: async (root, { searchTerm }) => {
+      if (searchTerm) {
+        const searchResults = await Recipe.find(
+          {
+            $text: { $search: searchTerm }
+          },
+          {
+            score: { $meta: "textScore" }
+          }
+        )
+          .sort({ score: { $meta: "textScore" } })
+          .exec();
+        return searchResults;
+      } else {
+        const recipes = await Recipe.find()
+          .sort({ likes: "desc", created: "desc" })
+          .exec();
+        return recipes;
+      }
+    },
     getCurrentUser: async (root, args, context) => {
       console.log(context);
       if (!context.currentUser) return null;

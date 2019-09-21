@@ -17,6 +17,12 @@ export const resolvers = {
         .exec();
       return allRecipes;
     },
+    getUserRecipes: async (root, { username }) => {
+      const userRecipes = await Recipe.find({ username })
+        .sort({ created: "desc" })
+        .exec();
+      return userRecipes;
+    },
     getRecipe: async (root, { _id }) => {
       const recipe = await Recipe.findOne({ _id });
       console.log(recipe);
@@ -44,11 +50,10 @@ export const resolvers = {
       }
     },
     getCurrentUser: async (root, args, context) => {
-      console.log(context);
       if (!context.currentUser) return null;
       const user = await User.findOne({
         username: context.currentUser.username
-      });
+      }).populate({ path: "favorites", model: "Recipe" });
       if (!user) throw new Error("User not found");
       return user;
     }

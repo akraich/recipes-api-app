@@ -28,6 +28,7 @@ export const typeDefs = gql`
   type Query {
     getAllRecipes: [Recipe]
     getRecipe(_id: ID!): Recipe
+    getUserRecipes(username: String!): [Recipe]
     getCurrentUser: User
     searchRecipes(searchTerm: String): [Recipe]
   }

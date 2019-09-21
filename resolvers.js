@@ -72,6 +72,10 @@ export const resolvers = {
       });
       return newRecipe;
     },
+    deleteRecipe: async (root, { _id }) => {
+      const deletedRecipe = await Recipe.findByIdAndRemove({ _id }).exec();
+      return deletedRecipe;
+    },
     signinUser: async (root, { username, password }) => {
       const user = await User.findOne({ username });
       if (!user) throw new Error("User not found");

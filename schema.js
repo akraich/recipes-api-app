@@ -42,6 +42,8 @@ export const typeDefs = gql`
       username: String
     ): Recipe
 
+    deleteRecipe(_id: ID!): Recipe
+
     signupUser(username: String!, email: String!, password: String!): Token
 
     signinUser(username: String!, password: String!): Token
